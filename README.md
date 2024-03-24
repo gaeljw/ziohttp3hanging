@@ -1,5 +1,7 @@
 # ziohttp3hanging
 
+https://github.com/zio/zio-http/issues/2742
+
 ```shell
 sbt test
 # The test should succeed with output like:
