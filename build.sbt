@@ -8,7 +8,7 @@ scalacOptions += "-release:%s".format(jdkVersion)
 javacOptions ++= Seq("-source", jdkVersion, "-target", jdkVersion)
 
 val zioConfigVersion = "4.0.1"
-val zioHttpVersion = "3.0.0-RC4"
+val zioHttpVersion = "0.0.5"
 
 lazy val nettyDeps = Bom.dependencies("io.netty" % "netty-bom" % "4.1.89.Final")
 

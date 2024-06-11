@@ -1,11 +1,12 @@
 package com.mycompany
 
-import Config.SomeConfig
-import Defects.{ExternalServiceError, UrlError}
+import com.mycompany.Config.SomeConfig
+import com.mycompany.Defects.{ExternalServiceError, UrlError}
 import org.slf4j.LoggerFactory
-import zio.http.{Client, Header, Headers, Request, Response, Status, URL, MediaType}
+import zio.http.model.{HeaderValues, Headers, Status}
+import zio.http.{Client, Request, Response, URL}
 import zio.json.{DecoderOps, JsonDecoder}
-import zio.{UIO, IO, Task, ZIO, ZLayer}
+import zio.{IO, Task, UIO, ZIO, ZLayer}
 
 object MyWsClient {
 
@@ -23,14 +24,14 @@ class MyWsClient(someConfig: SomeConfig, client: Client) {
   def getModels(): UIO[Seq[MyModel]] = {
     
     // These headers make the test hang forever
-    val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Authorization.Unparsed("", "plop-key"))
+//    val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Authorization.Unparsed("", "plop-key"))
     
     // These headers work fine
-    // val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Custom("Authorization", "plop-key"))
+     val headers: Headers = Headers.accept(HeaderValues.applicationJson) ++ Headers.authorization("plop-key")
     // val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Authorization.Unparsed("something", "plop-key"))
     // val headers: Headers = Headers(Header.Accept(MediaType.application.json))
     
-    val urlWithParams = URL.decode(s"${someConfig.url}/myModel")
+    val urlWithParams = URL.fromString(s"${someConfig.url}/myModel")
 
     println(headers)
 
