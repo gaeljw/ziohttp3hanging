@@ -23,10 +23,10 @@ class MyWsClient(someConfig: SomeConfig, client: Client) {
   def getModels(): UIO[Seq[MyModel]] = {
     
     // These headers make the test hang forever
-    val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Authorization.Unparsed("", "plop-key"))
+//    val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Authorization.Unparsed("", "plop-key"))
     
     // These headers work fine
-    // val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Custom("Authorization", "plop-key"))
+     val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Custom("Authorization", "plop-key"))
     // val headers: Headers = Headers(Header.Accept(MediaType.application.json), Header.Authorization.Unparsed("something", "plop-key"))
     // val headers: Headers = Headers(Header.Accept(MediaType.application.json))
     
